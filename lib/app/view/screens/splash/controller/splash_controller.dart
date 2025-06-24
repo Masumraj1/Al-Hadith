@@ -1,8 +1,9 @@
 
 
+import 'package:al_hadith/app/core/routes/route_path.dart';
+import 'package:al_hadith/app/core/routes/routes.dart';
 import 'package:get/get.dart';
-import 'package:scholarship/app/core/routes/route_path.dart';
-import 'package:scholarship/app/core/routes/routes.dart';
+
 
 
 
