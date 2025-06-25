@@ -8,7 +8,6 @@ class HadithDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       bottomNavigationBar: const CommonNavBar(currentIndex: 2),
 
@@ -46,12 +45,13 @@ class HadithDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: 'How the Divine Revelation started being revealed to Allah’s Messenger\n\n',
+                      text:
+                          'How the Divine Revelation started being revealed to Allah’s Messenger\n\n',
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                     TextSpan(
                       text:
-                      'In publishing and graphic design, Lorem Ipsum is a placeholder text commonly used to demonstrate the visual form of a document...',
+                          'In publishing and graphic design, Lorem Ipsum is a placeholder text commonly used to demonstrate the visual form of a document...',
                       style: TextStyle(fontSize: 13, color: Colors.black54),
                     ),
                   ],
@@ -75,28 +75,35 @@ class HadithDetailsScreen extends StatelessWidget {
                     children: [
                       const CircleAvatar(
                         backgroundColor: Color(0xFF00996E),
-                        child: Text(
-                          'B',
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        child: Text('B', style: TextStyle(color: Colors.white)),
                       ),
                       const SizedBox(width: 10),
                       const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Hadith No: 01",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14)),
-                            Text("Books Name",
-                                style: TextStyle(fontSize: 12, color: Colors.grey)),
+                            Text(
+                              "Hadith No: 01",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                              ),
+                            ),
+                            Text(
+                              "Books Name",
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                            ),
                           ],
                         ),
                       ),
                       Container(
-                        padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: Color(0xFF00996E),
                           borderRadius: BorderRadius.circular(20),
@@ -108,10 +115,11 @@ class HadithDetailsScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 4),
                       GestureDetector(
-                          onTap: (){
-                            showMoreOptionsBottomSheet(context);
-                          },
-                          child: const Icon(Icons.more_vert)),
+                        onTap: () {
+                          showMoreOptionsBottomSheet(context);
+                        },
+                        child: const Icon(Icons.more_vert),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -150,24 +158,17 @@ class HadithDetailsScreen extends StatelessWidget {
                   // Reference
                   Text(
                     '(See also 51, 2681, 2804...)',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey.shade600,
-                    ),
-                  )
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-
-
-
 
 void showMoreOptionsBottomSheet(BuildContext context) {
   showModalBottomSheet(
@@ -186,23 +187,27 @@ void showMoreOptionsBottomSheet(BuildContext context) {
               // Header Row
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:  [
+                children: [
                   Text(
                     "More Option",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   GestureDetector(
-                      onTap: (){
-                        context.pop();
-                      },
-                      child: Icon(Icons.close)),
+                    onTap: () {
+                      context.pop();
+                    },
+                    child: Icon(Icons.close),
+                  ),
                 ],
               ),
               const SizedBox(height: 16),
 
               // Options
               _MoreOptionItem(icon: Icons.send, label: 'Go To Main Hadith'),
-              _MoreOptionItem(icon: Icons.bookmark_border, label: 'Add to Collection'),
+              _MoreOptionItem(
+                icon: Icons.bookmark_border,
+                label: 'Add to Collection',
+              ),
               _MoreOptionItem(icon: Icons.copy, label: 'Bangla Copy'),
               _MoreOptionItem(icon: Icons.copy, label: 'English Copy'),
               _MoreOptionItem(icon: Icons.copy, label: 'Arabic Copy'),
@@ -229,10 +234,7 @@ class _MoreOptionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon, color: Colors.green),
-      title: Text(
-        label,
-        style: const TextStyle(fontSize: 14),
-      ),
+      title: Text(label, style: const TextStyle(fontSize: 14)),
       onTap: () {
         Navigator.pop(context); // or custom action
       },

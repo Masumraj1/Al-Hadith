@@ -49,8 +49,8 @@ class ChaptersScreen extends StatelessWidget {
               decoration:  BoxDecoration(
                 color: Color(0xFFF5F5F5),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40.w),
-                  topRight: Radius.circular(40.w),
+                  topLeft: Radius.circular(30.w),
+                  topRight: Radius.circular(30.w),
                 ),
               ),
               child: Column(

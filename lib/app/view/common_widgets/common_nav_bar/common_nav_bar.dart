@@ -1,3 +1,4 @@
+import 'package:al_hadith/app/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -19,40 +20,25 @@ class _CommonNavBarState extends State<CommonNavBar> {
   late int bottomNavIndex;
 
   final List<
-      ({
-        String route,
-        Widget selectedIcon,
-        Widget unselectedIcon,
-        String label
-      })> _navItems = [
+    ({String route, Widget selectedIcon, Widget unselectedIcon, String label})
+  >
+  _navItems = [
     (
       route: RoutePath.homeScreen,
-      selectedIcon: Icon(
-        Icons.home,
-        color: const Color(0xFF00996E),
-      ),
-      unselectedIcon: Icon(
-        Icons.home,
-        color: Colors.grey,
-      ),
+      selectedIcon: Icon(Icons.home, color: AppColors.primary),
+      unselectedIcon: Icon(Icons.home, color: Colors.grey),
       label: "",
     ),
     (
       route: RoutePath.chaptersScreen,
-    selectedIcon: Icon(Icons.bookmark,color: const Color(0xFF00996E),),
-    unselectedIcon:Icon(Icons.bookmark,color: Colors.grey,),
-      label: "",
-    ),
-    (
-      route: RoutePath.homeScreen,
-    selectedIcon: Icon(Icons.g_mobiledata,color: const Color(0xFF00996E),),
-    unselectedIcon:Icon(Icons.g_mobiledata,color: Colors.grey,),
+      selectedIcon: Icon(Icons.bookmark, color: AppColors.primary),
+      unselectedIcon: Icon(Icons.bookmark, color: Colors.grey),
       label: "",
     ),
     (
       route: RoutePath.hadithDetailsScreen,
-    selectedIcon: Icon(Icons.info,color: const Color(0xFF00996E),),
-    unselectedIcon:Icon(Icons.info,color: Colors.grey,),
+      selectedIcon: Icon(Icons.info_outlined, color: AppColors.primary),
+      unselectedIcon: Icon(Icons.info_outline, color: Colors.grey),
       label: "",
     ),
   ];
@@ -66,7 +52,7 @@ class _CommonNavBarState extends State<CommonNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(color: Colors.white),
+      decoration: const BoxDecoration(color: AppColors.white),
       height: 88.h,
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 26.w, vertical: 13.5.h),
