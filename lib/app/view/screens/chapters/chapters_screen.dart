@@ -1,18 +1,17 @@
+import 'package:al_hadith/app/core/constants/app_colors.dart';
+import 'package:al_hadith/app/core/constants/app_strings.dart';
+import 'package:al_hadith/app/view/common_widgets/custom_text_field/custom_text_field.dart';
+import 'package:al_hadith/app/view/screens/chapters/controller/chapter_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../common_widgets/common_nav_bar/common_nav_bar.dart';
 
 class ChaptersScreen extends StatelessWidget {
-  const ChaptersScreen({super.key});
+  ChaptersScreen({super.key});
 
-  final List<Map<String, String>> categories = const [
-    {'letter': 'আ', 'title': 'আকিদা'},
-    {'letter': 'আ', 'title': 'আমল ও নেকী'},
-    {'letter': 'ঈ', 'title': 'ঈমান'},
-    {'letter': 'দ', 'title': 'দান সদকাহ'},
-    {'letter': 'প', 'title': 'পরিচিতা'},
-  ];
+  final ChapterController controller = Get.find<ChapterController>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +20,18 @@ class ChaptersScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          // Title background
+          // ==============Title Top==============
           Container(
             height: double.infinity,
             width: double.infinity,
-            decoration: const BoxDecoration(
-              color: Color(0xFF1A8C6D),
-            ),
+            decoration: const BoxDecoration(color: AppColors.primary),
             child: Padding(
-              padding: const EdgeInsets.only(top: 40),
+              padding:  EdgeInsets.only(top: 40.h),
               child: Text(
-                'বিষয়ভিত্তিক হাদিস',
+                AppStrings.bisoyVitik,
                 style: TextStyle(
                   fontSize: 20.sp,
-                  color: Colors.white,
+                  color: AppColors.white,
                   fontWeight: FontWeight.w600,
                 ),
                 textAlign: TextAlign.center,
@@ -49,42 +46,41 @@ class ChaptersScreen extends StatelessWidget {
             right: 0,
             bottom: 0,
             child: Container(
-              decoration: const BoxDecoration(
+              decoration:  BoxDecoration(
                 color: Color(0xFFF5F5F5),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
+                  topLeft: Radius.circular(40.w),
+                  topRight: Radius.circular(40.w),
                 ),
               ),
               child: Column(
                 children: [
+                  //====================Search Field==========
                   Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'বিষয় সার্চ করুন',
-                        prefixIcon: const Icon(Icons.search),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 10),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                      vertical: 20.h,
+                    ),
+                    child: CustomTextField(
+                      hintText: AppStrings.bisoy,
+                      suffixIcon: Icon(Icons.search),
+                      fieldBorderColor: AppColors.white,
                     ),
                   ),
                   Expanded(
                     child: ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: categories.length,
+                      padding:  EdgeInsets.symmetric(horizontal: 16.w),
+                      itemCount: controller.categories.length,
                       itemBuilder: (context, index) {
-                        final item = categories[index];
+                        final item = controller.categories[index];
+                        final List<String> titles = item['titles'];
+
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 12),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              // Letter Header
                               Container(
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
@@ -92,38 +88,50 @@ class ChaptersScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Text(
-                                  item['letter']!,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
+                                  item['letter'] ?? "",
+                                  style:  TextStyle(
+                                    color: AppColors.white,
+                                    fontSize: 18.sp,
                                   ),
                                 ),
                               ),
                               SizedBox(height: 10.h),
-                              Row(
-                                children: [
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Container(
-                                      padding: const EdgeInsets.all(14),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: const [
-                                          BoxShadow(
-                                            color: Colors.black12,
-                                            blurRadius: 4,
-                                            offset: Offset(0, 2),
-                                          )
-                                        ],
+
+                              //============ List of Titles =========
+                              ...titles.map(
+                                (title) => Padding(
+                                  padding:  EdgeInsets.only(bottom: 8.h),
+                                  child: Row(
+                                    children: [
+                                       SizedBox(width: 12.w),
+                                      Expanded(
+                                        child: Container(
+                                          padding:  EdgeInsets.all(14.r),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.white,
+                                            borderRadius: BorderRadius.circular(
+                                              10.r,
+                                            ),
+                                            boxShadow:  [
+                                              BoxShadow(
+                                                color: AppColors.black12,
+                                                blurRadius: 4.r,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Text(
+                                            title,
+                                            style:  TextStyle(
+                                              fontSize: 16.sp,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                      child: Text(
-                                        item['title']!,
-                                        style: const TextStyle(fontSize: 16),
-                                      ),
-                                    ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
                             ],
                           ),

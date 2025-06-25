@@ -10,6 +10,8 @@ class AppStrings {
   static const sodaka = "সদাকা";
   static const hadith = "হাদিস";
   static const sosongthitohadith = "[১০০ সুসংগঠিত হাদিস]";
+  static const bisoy = "বিষয় সার্চ করুন";
+  static const bisoyVitik = "বিষয়ভিত্তিক হাদিস";
 
 
 

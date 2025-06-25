@@ -10,47 +10,47 @@ import 'route_path.dart';
 
 class AppRouter {
   static final GoRouter initRoute = GoRouter(
-      initialLocation: RoutePath.homeScreen.addBasePath,
-      debugLogDiagnostics: true,
-      navigatorKey: GlobalKey<NavigatorState>(),
-      routes: [
+    initialLocation: RoutePath.homeScreen.addBasePath,
+    debugLogDiagnostics: true,
+    navigatorKey: GlobalKey<NavigatorState>(),
+    routes: [
+      ///======================= HomeScreen =======================
+      GoRoute(
+        name: RoutePath.homeScreen,
+        path: RoutePath.homeScreen.addBasePath,
+        pageBuilder:
+            (context, state) => _buildPageWithAnimation(
+              child: const HomeScreen(),
+              state: state,
+              disableAnimation: true,
+            ),
+      ),
 
-        ///======================= HomeScreen =======================
-        GoRoute(
-          name: RoutePath.homeScreen,
-          path: RoutePath.homeScreen.addBasePath,
-          pageBuilder: (context, state) => _buildPageWithAnimation(
-            child:  const HomeScreen(),
-            state: state,
-            disableAnimation: true
+      ///=======================  ChaptersScreen =======================
+      GoRoute(
+        name: RoutePath.chaptersScreen,
+        path: RoutePath.chaptersScreen.addBasePath,
+        pageBuilder:
+            (context, state) => _buildPageWithAnimation(
+              child: ChaptersScreen(),
+              state: state,
+              disableAnimation: true,
+            ),
+      ),
 
-          ),
-        ),
-
-        ///=======================  ChaptersScreen =======================
-        GoRoute(
-          name: RoutePath.chaptersScreen,
-          path: RoutePath.chaptersScreen.addBasePath,
-          pageBuilder: (context, state) => _buildPageWithAnimation(
-            child:  const ChaptersScreen(),
-            state: state,
-              disableAnimation: true
-
-          ),
-        ),
-
-        ///=======================  HadithDetailsScreen =======================
-        GoRoute(
-          name: RoutePath.hadithDetailsScreen,
-          path: RoutePath.hadithDetailsScreen.addBasePath,
-          pageBuilder: (context, state) => _buildPageWithAnimation(
-            child:  const HadithDetailsScreen(),
-            state: state,
-              disableAnimation: true
-
-          ),
-        ),
-      ]);
+      ///=======================  HadithDetailsScreen =======================
+      GoRoute(
+        name: RoutePath.hadithDetailsScreen,
+        path: RoutePath.hadithDetailsScreen.addBasePath,
+        pageBuilder:
+            (context, state) => _buildPageWithAnimation(
+              child: const HadithDetailsScreen(),
+              state: state,
+              disableAnimation: true,
+            ),
+      ),
+    ],
+  );
 
   static CustomTransitionPage _buildPageWithAnimation({
     required Widget child,
@@ -77,13 +77,11 @@ class AppRouter {
           // Center Open Animation
           var curve = Curves.easeOut; // Smooth opening
           var tween = Tween(begin: 0.0, end: 1.0); // Scale transition
-          var scaleAnimation =
-          animation.drive(tween.chain(CurveTween(curve: curve)));
-
-          return ScaleTransition(
-            scale: scaleAnimation,
-            child: child,
+          var scaleAnimation = animation.drive(
+            tween.chain(CurveTween(curve: curve)),
           );
+
+          return ScaleTransition(scale: scaleAnimation, child: child);
         },
       );
     }
@@ -98,10 +96,7 @@ class AppRouter {
         const end = Offset.zero;
         var tween = Tween(begin: begin, end: end);
         var offsetAnimation = animation.drive(tween);
-        return SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        );
+        return SlideTransition(position: offsetAnimation, child: child);
       },
     );
   }
