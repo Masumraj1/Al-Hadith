@@ -5,6 +5,7 @@ import 'package:al_hadith/app/view/screens/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../view/screens/hadith_details/hadith_details_screen.dart';
 import 'route_path.dart';
 
 class AppRouter {
@@ -21,6 +22,7 @@ class AppRouter {
           pageBuilder: (context, state) => _buildPageWithAnimation(
             child:  const HomeScreen(),
             state: state,
+            disableAnimation: true
 
           ),
         ),
@@ -32,6 +34,19 @@ class AppRouter {
           pageBuilder: (context, state) => _buildPageWithAnimation(
             child:  const ChaptersScreen(),
             state: state,
+              disableAnimation: true
+
+          ),
+        ),
+
+        ///=======================  HadithDetailsScreen =======================
+        GoRoute(
+          name: RoutePath.hadithDetailsScreen,
+          path: RoutePath.hadithDetailsScreen.addBasePath,
+          pageBuilder: (context, state) => _buildPageWithAnimation(
+            child:  const HadithDetailsScreen(),
+            state: state,
+              disableAnimation: true
 
           ),
         ),
