@@ -1,0 +1,51 @@
+import 'dart:ui';
+
+import 'package:get/get.dart';
+
+class HomeController extends GetxController{
+
+  int currentIndex = 0;
+
+  //>>>>>>>>>>>>>>>>hadithList<<<<<<<<<<<<<<<<<<<<<>
+  final List<String> hadithList = [
+    "তিনি বললেন, রাসূলুল্লাহ (সা.) বলেছেন, “আমি তোমাদেরকে কবর যিয়ারত করতে নিষেধ করেছিলাম এখন তোমরা উহার যিয়ারত করো।” (মুসলিম ৯৭৭)",
+    "রাসূলুল্লাহ (সা.) বলেছেন, ‘যে ব্যক্তি কোনো মুমিনের দুনিয়ার দুঃখ দূর করে দেয়, আল্লাহ কিয়ামতের দিনে তার দুঃখ দূর করবেন।’ (মুসলিম ২৬৯৯)",
+    "রাসূলুল্লাহ (সা.) বলেন, ‘যে আমাদের মতো দেখতে চায়, সে যেন মৃতকে অনুসরণ করে।’ (মুসনাদে আহমদ)",
+    "হাদীস: দান করলে সম্পদ কমে না। (মুসলিম)",
+    "তোমরা সত্য বল, কারণ সত্য সৎকর্মের দিকে পরিচালিত করে। (বুখারি)",
+  ];
+
+
+  //>>>>>>>>>>>>>>>hadithBooks<<<<<<<<<<<<<<<<<<<<<>
+  final List<Map<String, dynamic>> hadithBooks = [
+    {
+      'title': 'সহিহ বুখারী',
+      'subtitle': 'ইমাম বুখারী',
+      'count': '৭৫৬৩',
+      'iconText': 'B',
+      'iconColor': Color(0xFF56C596),
+    },
+    {
+      'title': 'সহিহ মুসলিম',
+      'subtitle': 'ইমাম মুসলিম',
+      'count': '৭১৯০',
+      'iconText': 'M',
+      'iconColor': Color(0xFF007BFF),
+    },
+    {
+      'title': 'সুনানে আবু দাউদ',
+      'subtitle': 'ইমাম আবু দাউদ',
+      'count': '৫২৭৪',
+      'iconText': 'A',
+      'iconColor': Color(0xFFFF7043),
+    },
+    {
+      'title': 'সুনানে তিরমিজি',
+      'subtitle': 'ইমাম তিরমিজি',
+      'count': '৩৯৫৬',
+      'iconText': 'T',
+      'iconColor': Color(0xFFAB47BC),
+    },
+  ];
+
+}
