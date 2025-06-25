@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../common_widgets/common_nav_bar/common_nav_bar.dart';
 
@@ -106,7 +107,11 @@ class HadithDetailsScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 4),
-                      const Icon(Icons.more_vert),
+                      GestureDetector(
+                          onTap: (){
+                            showMoreOptionsBottomSheet(context);
+                          },
+                          child: const Icon(Icons.more_vert)),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -156,6 +161,81 @@ class HadithDetailsScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+
+
+
+
+void showMoreOptionsBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    ),
+    backgroundColor: Colors.white,
+    builder: (context) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Header Row
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:  [
+                  Text(
+                    "More Option",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  GestureDetector(
+                      onTap: (){
+                        context.pop();
+                      },
+                      child: Icon(Icons.close)),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Options
+              _MoreOptionItem(icon: Icons.send, label: 'Go To Main Hadith'),
+              _MoreOptionItem(icon: Icons.bookmark_border, label: 'Add to Collection'),
+              _MoreOptionItem(icon: Icons.copy, label: 'Bangla Copy'),
+              _MoreOptionItem(icon: Icons.copy, label: 'English Copy'),
+              _MoreOptionItem(icon: Icons.copy, label: 'Arabic Copy'),
+              _MoreOptionItem(icon: Icons.add_box_outlined, label: 'Add Hifz'),
+              _MoreOptionItem(icon: Icons.note_add_outlined, label: 'Add Note'),
+              _MoreOptionItem(icon: Icons.share_outlined, label: 'Share'),
+              _MoreOptionItem(icon: Icons.info_outline, label: 'Report'),
+              const SizedBox(height: 12),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+class _MoreOptionItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+
+  const _MoreOptionItem({required this.icon, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.green),
+      title: Text(
+        label,
+        style: const TextStyle(fontSize: 14),
+      ),
+      onTap: () {
+        Navigator.pop(context); // or custom action
+      },
     );
   }
 }

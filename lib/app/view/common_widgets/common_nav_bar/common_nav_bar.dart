@@ -6,7 +6,6 @@ import '../../../core/routes/route_path.dart';
 import '../../../core/routes/routes.dart';
 import '../custom_text/custom_text.dart';
 
-
 class CommonNavBar extends StatefulWidget {
   final int currentIndex;
 
@@ -21,34 +20,40 @@ class _CommonNavBarState extends State<CommonNavBar> {
 
   final List<
       ({
-      String route,
-      Widget selectedIcon,
-      Widget unselectedIcon,
-      String label
+        String route,
+        Widget selectedIcon,
+        Widget unselectedIcon,
+        String label
       })> _navItems = [
     (
-    route: RoutePath.homeScreen,
-    selectedIcon: Icon(Icons.home),
-    unselectedIcon:Icon(Icons.home),
-    label: "",
+      route: RoutePath.homeScreen,
+      selectedIcon: Icon(
+        Icons.home,
+        color: const Color(0xFF00996E),
+      ),
+      unselectedIcon: Icon(
+        Icons.home,
+        color: Colors.grey,
+      ),
+      label: "",
     ),
     (
-    route: RoutePath.chaptersScreen,
-    selectedIcon: Icon(Icons.bookmark_add_outlined),unselectedIcon: Icon(Icons.bookmark_add_outlined),
-
-    label:"",
+      route: RoutePath.chaptersScreen,
+    selectedIcon: Icon(Icons.bookmark,color: const Color(0xFF00996E),),
+    unselectedIcon:Icon(Icons.bookmark,color: Colors.grey,),
+      label: "",
     ),
     (
-    route: RoutePath.homeScreen,
-    selectedIcon: Icon(Icons.home),
-    unselectedIcon:Icon(Icons.home),
-    label: "",
+      route: RoutePath.homeScreen,
+    selectedIcon: Icon(Icons.g_mobiledata,color: const Color(0xFF00996E),),
+    unselectedIcon:Icon(Icons.g_mobiledata,color: Colors.grey,),
+      label: "",
     ),
     (
-    route: RoutePath.hadithDetailsScreen,
-    selectedIcon: Icon(Icons.info),
-    unselectedIcon:Icon(Icons.info),
-    label: "",
+      route: RoutePath.hadithDetailsScreen,
+    selectedIcon: Icon(Icons.info,color: const Color(0xFF00996E),),
+    unselectedIcon:Icon(Icons.info,color: Colors.grey,),
+      label: "",
     ),
   ];
 
@@ -69,7 +74,7 @@ class _CommonNavBarState extends State<CommonNavBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(
           _navItems.length,
-              (index) => InkWell(
+          (index) => InkWell(
             onTap: () => _onTap(index),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -82,9 +87,7 @@ class _CommonNavBarState extends State<CommonNavBar> {
                   text: _navItems[index].label.tr,
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w400,
-                  color: bottomNavIndex == index
-                      ? Colors.white
-                      : Colors.green,
+                  color: bottomNavIndex == index ? Colors.white : Colors.green,
                 ),
               ],
             ),
