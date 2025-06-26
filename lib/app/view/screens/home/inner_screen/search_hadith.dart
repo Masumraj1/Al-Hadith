@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/routes/route_path.dart';
 import '../../../../core/routes/routes.dart';
+import '../../../common_widgets/common_appbar/common_appbar.dart';
 import '../../../common_widgets/custom_text_field/custom_text_field.dart';
 import '../../../common_widgets/haxon_widget/haxon_widget.dart';
 
@@ -20,34 +21,9 @@ class SearchHadith extends StatelessWidget {
     final List<String> subItems = List<String>.from(data['items']);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.white),
-          onPressed: () => context.pop(),
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            Text(
-              subTitle,
-              style: TextStyle(
-                color: AppColors.white.withOpacity(0.9),
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ],
-        ),
+      appBar: CommonAppBar(
+        title: title,
+        subTitle: subTitle,
       ),
       body: Stack(
         children: [

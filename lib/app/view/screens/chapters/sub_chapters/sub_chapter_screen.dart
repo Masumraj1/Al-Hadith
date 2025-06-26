@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/routes/route_path.dart';
 import '../../../../core/routes/routes.dart';
+import '../../../common_widgets/common_appbar/common_appbar.dart';
 
 class SubChapterScreen extends StatelessWidget {
   const SubChapterScreen({super.key});
@@ -16,22 +17,9 @@ class SubChapterScreen extends StatelessWidget {
     final List<String> subItems = List<String>.from(data['items']);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.white),
-          onPressed: () => context.pop(),
-        ),
-        title: Text(
-          title,
-          style: TextStyle(
-            color: AppColors.white,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        centerTitle: true,
+      appBar: CommonAppBar(
+        title: title,
+        subTitle: "",
       ),
       body: Stack(
         children: [

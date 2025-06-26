@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_colors.dart';
+import '../../common_widgets/common_appbar/common_appbar.dart';
 import '../../common_widgets/hadith_rich_text/hadith_rich_text.dart';
 import '../../common_widgets/haxon_widget/haxon_widget.dart';
 
@@ -19,33 +20,9 @@ class HadithDetailsScreen extends StatelessWidget {
     final bool isHadith = data["isHadith"];
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.white),
-          onPressed: () => context.pop(),
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              subTitle,
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),   Text(
-              title,
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ],
-        ),
+      appBar: CommonAppBar(
+        title: subTitle,
+        subTitle: title,
       ),
       body: Stack(
         children: [
