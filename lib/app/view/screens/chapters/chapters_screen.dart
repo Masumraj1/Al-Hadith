@@ -17,8 +17,9 @@ class ChaptersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const CommonNavBar(currentIndex: 1),
-      backgroundColor: Colors.black,
-      body: Stack(
+      // backgroundColor: Colors.red,
+      body:
+      Stack(
         children: [
           // ==============Title Top==============
           Container(

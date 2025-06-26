@@ -1,7 +1,11 @@
+import 'package:al_hadith/app/view/common_widgets/custom_text/custom_text.dart';
+import 'package:al_hadith/app/view/screens/hadith_details/widgets/show_more_options_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/constants/app_colors.dart';
 import '../../common_widgets/common_nav_bar/common_nav_bar.dart';
+import '../../common_widgets/hadith_rich_text/hadith_rich_text.dart';
 
 class HadithDetailsScreen extends StatelessWidget {
   const HadithDetailsScreen({super.key});
@@ -11,233 +15,198 @@ class HadithDetailsScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: const CommonNavBar(currentIndex: 2),
 
-      backgroundColor: const Color(0xFFF1F5F9),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF00996E),
-        title: const Text(
-          'Sahih Bukhari',
-          style: TextStyle(color: Colors.white),
-        ),
-        iconTheme: const IconThemeData(color: Colors.white),
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Chapter Header
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: RichText(
-                text: const TextSpan(
-                  style: TextStyle(color: Colors.black87, fontSize: 14),
-                  children: [
-                    TextSpan(
-                      text: '1/1 Chapter: ',
-                      style: TextStyle(
-                        color: Color(0xFF00996E),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextSpan(
-                      text:
-                          'How the Divine Revelation started being revealed to Allah’s Messenger\n\n',
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    TextSpan(
-                      text:
-                          'In publishing and graphic design, Lorem Ipsum is a placeholder text commonly used to demonstrate the visual form of a document...',
-                      style: TextStyle(fontSize: 13, color: Colors.black54),
-                    ),
-                  ],
-                ),
+      // backgroundColor: AppColors.primary,
+
+      body: Stack(
+        children: [
+          // ==============Title Top==============
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: const BoxDecoration(color: AppColors.primary),
+            child: Padding(
+              padding: EdgeInsets.only(top: 40.h),
+              child: CustomText(
+                text: "Sahih Bukhari",
+                fontSize: 20.sp,
+                color: AppColors.white,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+          ),
 
-            // Hadith Card
-            Container(
-              padding: const EdgeInsets.all(16),
+          // Content container with top-left and top-right curve
+          Positioned(
+            top: 100.h,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
+                color: Color(0xFFF5F5F5),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30.w),
+                  topRight: Radius.circular(30.w),
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Top row
-                  Row(
+              child: Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CircleAvatar(
-                        backgroundColor: Color(0xFF00996E),
-                        child: Text('B', style: TextStyle(color: Colors.white)),
+                      // ===============Details Header Header===========
+                      Container(
+                        padding: EdgeInsets.all(12.r),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(12.r),
+                            topLeft: Radius.circular(12.r),
+                          ),
+                        ),
+                        child: HadithRichText(
+                          chapterLabel: '1/1 Chapter: ',
+                          chapterTitle:
+                              'How the Divine Revelation started being revealed to Allah’s Messenger',
+                          description:
+                              'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.',
+                        ),
                       ),
-                      const SizedBox(width: 10),
-                      const Expanded(
+                      const SizedBox(height: 16),
+
+                      // ===========Hadith Card================
+                      Container(
+                        padding: EdgeInsets.all(16.r),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                           borderRadius: BorderRadius.circular(12.r),
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "Hadith No: 01",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14,
-                              ),
+                            // Top row
+                            Row(
+                              children: [
+                                const CircleAvatar(
+                                  backgroundColor: AppColors.primary,
+                                  child: Text(
+                                    'B',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                SizedBox(width: 10.w),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomText(
+                                        fontSize: 13.sp,
+                                        text: "Hadith No: 01",
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.black,
+                                      ),
+
+                                      CustomText(
+                                        fontSize: 12.sp,
+                                        text: "Books Name",
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.grey,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 10.w,
+                                    vertical: 4.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(20.r),
+                                  ),
+                                  child: CustomText(
+                                    fontSize: 12.sp,
+                                    text: "Sahih",
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                                SizedBox(width: 4.w),
+                                //=================Bottom Sheet Icon==============
+                                GestureDetector(
+                                  onTap: () {
+                                    showMoreOptionsBottomSheet(context);
+                                  },
+                                  child: const Icon(
+                                    Icons.more_vert,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              "Books Name",
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
+                            SizedBox(height: 16.w),
+
+                            // ============Arabic Hadith==============
+                            CustomText(
+                              textAlign: TextAlign.right,
+                              maxLines: 20,
+                              fontSize: 20.sp,
+                              text:
+                                  "عَنْ أَبِي هُرَيْرَةَ - رضي الله عنه - قَالَ: قَالَ رَسُولُ اللَّهِ - صلى الله عليه وسلم - فِي الْبَحْرِ: «هُوَ الطَّهُورُ مَاؤُهُ الْحِلُّ مَيْتَتُهُ» أَخْرَجَهُ الْأَرْبَعَةُ، وَابْنُ أَبِي شَيْبَةَ وَاللَّفْظُ لَهُ (1)، وَصَحَّحَهُ ابْنُ خُزَيْمَةَ وَالتِّرْمِذِيُّ",
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.black,
+                            ),
+
+                            SizedBox(height: 16.w),
+
+                            // Narrator
+                            CustomText(
+                              textAlign: TextAlign.start,
+                              maxLines: 10,
+                              fontSize: 14.sp,
+                              text:
+                                  "It is narrated from Abu Hurairah (may Allaah have mercy on him)",
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.primary,
+                            ),
+
+                            SizedBox(height: 8.h),
+
+                            // Bangla or English Translation
+                            CustomText(
+                              textAlign: TextAlign.start,
+                              maxLines: 20,
+                              fontSize: 14.sp,
+                              text:
+                                  "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.black,
+                            ),
+
+                            const SizedBox(height: 16),
+
+                            // Reference
+                            CustomText(
+                              textAlign: TextAlign.start,
+                              maxLines: 5,
+                              fontSize: 12.sp,
+                              text:
+                                  "(See also 51, 2681, 2804, 2941, 2978, 3174, 4553, 5980, 6260, 7196, 7541) (Modern Publication: 6, Islamic Foundation: 6)",
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey,
                             ),
                           ],
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Color(0xFF00996E),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Text(
-                          "Sahih",
-                          style: TextStyle(color: Colors.white, fontSize: 12),
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      GestureDetector(
-                        onTap: () {
-                          showMoreOptionsBottomSheet(context);
-                        },
-                        child: const Icon(Icons.more_vert),
-                      ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-
-                  // Arabic Hadith
-                  const Text(
-                    'عَنْ أَبِي هُرَيْرَةَ ... وَالدِّيْنِ',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Amiri',
-                      height: 2,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Narrator
-                  const Text(
-                    "It is narrated from Abu Hurairah (may Allaah have mercy on him):",
-                    style: TextStyle(
-                      color: Color(0xFF00996E),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-
-                  // Bangla or English Translation
-                  const Text(
-                    'In publishing and graphic design, Lorem Ipsum is a placeholder text commonly used...',
-                    style: TextStyle(fontSize: 14, color: Colors.black87),
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  // Reference
-                  Text(
-                    '(See also 51, 2681, 2804...)',
-                    style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
-                  ),
-                ],
+                ),
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-void showMoreOptionsBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-    ),
-    backgroundColor: Colors.white,
-    builder: (context) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Header Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "More Option",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      context.pop();
-                    },
-                    child: Icon(Icons.close),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              // Options
-              _MoreOptionItem(icon: Icons.send, label: 'Go To Main Hadith'),
-              _MoreOptionItem(
-                icon: Icons.bookmark_border,
-                label: 'Add to Collection',
-              ),
-              _MoreOptionItem(icon: Icons.copy, label: 'Bangla Copy'),
-              _MoreOptionItem(icon: Icons.copy, label: 'English Copy'),
-              _MoreOptionItem(icon: Icons.copy, label: 'Arabic Copy'),
-              _MoreOptionItem(icon: Icons.add_box_outlined, label: 'Add Hifz'),
-              _MoreOptionItem(icon: Icons.note_add_outlined, label: 'Add Note'),
-              _MoreOptionItem(icon: Icons.share_outlined, label: 'Share'),
-              _MoreOptionItem(icon: Icons.info_outline, label: 'Report'),
-              const SizedBox(height: 12),
-            ],
           ),
-        ),
-      );
-    },
-  );
-}
-
-class _MoreOptionItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-
-  const _MoreOptionItem({required this.icon, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.green),
-      title: Text(label, style: const TextStyle(fontSize: 14)),
-      onTap: () {
-        Navigator.pop(context); // or custom action
-      },
+        ],
+      ),
     );
   }
 }
