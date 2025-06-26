@@ -5,7 +5,9 @@ import 'package:al_hadith/app/view/screens/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../view/screens/chapters/sub_chapters/sub_chapter_screen.dart';
 import '../../view/screens/hadith_details/hadith_details_screen.dart';
+import '../../view/screens/no_screen/no_screen.dart';
 import 'route_path.dart';
 
 class AppRouter {
@@ -47,6 +49,30 @@ class AppRouter {
               child: const HadithDetailsScreen(),
               state: state,
               disableAnimation: true,
+            ),
+      ),
+
+      ///=======================  SubChapterScreen =======================
+      GoRoute(
+        name: RoutePath.subChapterScreen,
+        path: RoutePath.subChapterScreen.addBasePath,
+        pageBuilder:
+            (context, state) => _buildPageWithAnimation(
+              child:  SubChapterScreen(),
+              state: state,
+              transitionType: TransitionType.detailsScreen
+            ),
+      ),
+
+      ///=======================  NoScreen =======================
+      GoRoute(
+        name: RoutePath.noScreen,
+        path: RoutePath.noScreen.addBasePath,
+        pageBuilder:
+            (context, state) => _buildPageWithAnimation(
+              child:  NoScreen(),
+              state: state,
+              disableAnimation: true
             ),
       ),
     ],

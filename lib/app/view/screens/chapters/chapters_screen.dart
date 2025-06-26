@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../core/routes/route_path.dart';
+import '../../../core/routes/routes.dart';
 import '../../common_widgets/common_nav_bar/common_nav_bar.dart';
 
 class ChaptersScreen extends StatelessWidget {
@@ -18,8 +20,7 @@ class ChaptersScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: const CommonNavBar(currentIndex: 1),
       // backgroundColor: Colors.red,
-      body:
-      Stack(
+      body: Stack(
         children: [
           // ==============Title Top==============
           Container(
@@ -27,7 +28,7 @@ class ChaptersScreen extends StatelessWidget {
             width: double.infinity,
             decoration: const BoxDecoration(color: AppColors.primary),
             child: Padding(
-              padding:  EdgeInsets.only(top: 40.h),
+              padding: EdgeInsets.only(top: 40.h),
               child: Text(
                 AppStrings.bisoyVitik,
                 style: TextStyle(
@@ -47,7 +48,7 @@ class ChaptersScreen extends StatelessWidget {
             right: 0,
             bottom: 0,
             child: Container(
-              decoration:  BoxDecoration(
+              decoration: BoxDecoration(
                 color: Color(0xFFF5F5F5),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.w),
@@ -70,7 +71,7 @@ class ChaptersScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: ListView.builder(
-                      padding:  EdgeInsets.symmetric(horizontal: 16.w),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
                       itemCount: controller.categories.length,
                       itemBuilder: (context, index) {
                         final item = controller.categories[index];
@@ -90,7 +91,7 @@ class ChaptersScreen extends StatelessWidget {
                                 ),
                                 child: Text(
                                   item['letter'] ?? "",
-                                  style:  TextStyle(
+                                  style: TextStyle(
                                     color: AppColors.white,
                                     fontSize: 18.sp,
                                   ),
@@ -101,31 +102,38 @@ class ChaptersScreen extends StatelessWidget {
                               //============ List of Titles =========
                               ...titles.map(
                                 (title) => Padding(
-                                  padding:  EdgeInsets.only(bottom: 8.h),
+                                  padding: EdgeInsets.only(bottom: 8.h),
                                   child: Row(
                                     children: [
-                                       SizedBox(width: 12.w),
+                                      SizedBox(width: 12.w),
                                       Expanded(
-                                        child: Container(
-                                          padding:  EdgeInsets.all(14.r),
-                                          decoration: BoxDecoration(
-                                            color: AppColors.white,
-                                            borderRadius: BorderRadius.circular(
-                                              10.r,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            AppRouter.route.pushNamed(
+                                              RoutePath.subChapterScreen,
+                                              extra: title,
+                                            );
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(14.r),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: AppColors.black12,
+                                                  blurRadius: 4.r,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
                                             ),
-                                            boxShadow:  [
-                                              BoxShadow(
-                                                color: AppColors.black12,
-                                                blurRadius: 4.r,
-                                                offset: Offset(0, 2),
+                                            child: Text(
+                                              title,
+                                              style: TextStyle(
+                                                fontSize: 16.sp,
+                                                color: Colors.black,
                                               ),
-                                            ],
-                                          ),
-                                          child: Text(
-                                            title,
-                                            style:  TextStyle(
-                                              fontSize: 16.sp,
-                                              color: Colors.black,
                                             ),
                                           ),
                                         ),

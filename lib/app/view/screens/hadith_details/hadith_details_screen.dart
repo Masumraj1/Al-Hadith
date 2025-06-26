@@ -2,6 +2,7 @@ import 'package:al_hadith/app/view/common_widgets/custom_text/custom_text.dart';
 import 'package:al_hadith/app/view/screens/hadith_details/widgets/show_more_options_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../common_widgets/common_nav_bar/common_nav_bar.dart';
@@ -13,10 +14,11 @@ class HadithDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: const CommonNavBar(currentIndex: 2),
+    final String title = GoRouterState.of(context).extra as String;
+    debugPrint("$title");
 
-      // backgroundColor: AppColors.primary,
+    return Scaffold(
+
 
       body: Stack(
         children: [
@@ -28,7 +30,7 @@ class HadithDetailsScreen extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 40.h),
               child: CustomText(
-                text: "Sahih Bukhari",
+                text: title,
                 fontSize: 20.sp,
                 color: AppColors.white,
                 fontWeight: FontWeight.bold,

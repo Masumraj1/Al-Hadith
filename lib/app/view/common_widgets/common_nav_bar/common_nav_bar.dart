@@ -36,7 +36,7 @@ class _CommonNavBarState extends State<CommonNavBar> {
       label: "",
     ),
     (
-      route: RoutePath.hadithDetailsScreen,
+      route: RoutePath.noScreen,
       selectedIcon: Icon(Icons.info_outlined, color: AppColors.primary),
       unselectedIcon: Icon(Icons.info_outline, color: Colors.grey),
       label: "",
