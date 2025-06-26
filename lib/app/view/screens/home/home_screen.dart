@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../core/routes/route_path.dart';
+import '../../../core/routes/routes.dart';
 import '../../common_widgets/common_nav_bar/common_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -106,12 +108,30 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: homeController.hadithBooks.length,
               itemBuilder: (context, index) {
                 final book = homeController.hadithBooks[index];
-                return HadithBookItem(
-                  title: book['title'],
-                  subtitle: book['subtitle'],
-                  count: book['count'],
-                  iconText: book['iconText'],
-                  iconColor: book['iconColor'],
+                return GestureDetector(
+                  onTap: () {
+                    final title = book['title'];
+                    final subTitle = '${book['count']} টি হাদীস';
+                    final items = homeController.getTopicsByTitle(title);
+
+                    AppRouter.route.pushNamed(
+                      RoutePath.searchHadith,
+                      extra: {
+                        'title': title,
+                        'subTitle': subTitle,
+                        'items': items,
+                      },
+                    );
+
+                  },
+
+                  child: HadithBookItem(
+                    title: book['title'],
+                    subtitle: book['subtitle'],
+                    count: book['count'],
+                    iconText: book['iconText'],
+                    iconColor: book['iconColor'],
+                  ),
                 );
               },
             ),

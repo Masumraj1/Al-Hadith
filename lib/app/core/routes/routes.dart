@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../view/screens/chapters/sub_chapters/sub_chapter_screen.dart';
 import '../../view/screens/hadith_details/hadith_details_screen.dart';
+import '../../view/screens/home/inner_screen/search_hadith.dart';
 import '../../view/screens/no_screen/no_screen.dart';
 import 'route_path.dart';
 
@@ -59,6 +60,19 @@ class AppRouter {
         pageBuilder:
             (context, state) => _buildPageWithAnimation(
               child:  SubChapterScreen(),
+              state: state,
+              transitionType: TransitionType.detailsScreen
+            ),
+      ),
+
+
+      ///=======================  SearchHadith =======================
+      GoRoute(
+        name: RoutePath.searchHadith,
+        path: RoutePath.searchHadith.addBasePath,
+        pageBuilder:
+            (context, state) => _buildPageWithAnimation(
+              child:  SearchHadith(),
               state: state,
               transitionType: TransitionType.detailsScreen
             ),

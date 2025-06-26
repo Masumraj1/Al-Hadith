@@ -7,6 +7,7 @@ class RoutePath {
   static const String hadithDetailsScreen = 'HadithDetailsScreen';
   static const String subChapterScreen = 'SubChapterScreen';
   static const String noScreen = 'NoScreen';
+  static const String searchHadith = 'SearchHadith';
 
 
 
