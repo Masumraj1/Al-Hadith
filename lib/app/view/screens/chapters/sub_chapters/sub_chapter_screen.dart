@@ -1,50 +1,47 @@
 import 'package:al_hadith/app/core/constants/app_colors.dart';
-import 'package:al_hadith/app/view/screens/chapters/controller/chapter_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/routes/route_path.dart';
 import '../../../../core/routes/routes.dart';
 
 class SubChapterScreen extends StatelessWidget {
-  SubChapterScreen({super.key});
-
-  final ChapterController controller = Get.find<ChapterController>();
+  const SubChapterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Receive title from previous screen
-    final String title = GoRouterState.of(context).extra as String;
-    debugPrint("$title");
-
+    final Map data = GoRouterState.of(context).extra as Map;
+    final String title = data['title'];
+    final List<String> subItems = List<String>.from(data['items']);
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.primary,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.white),
+          onPressed: () => context.pop(),
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+            color: AppColors.white,
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Stack(
         children: [
-          // ==============Title Top==============
           Container(
             height: double.infinity,
             width: double.infinity,
             decoration: const BoxDecoration(color: AppColors.primary),
-            child: Padding(
-              padding: EdgeInsets.only(top: 40.h, left: 12.w, right: 12.w),
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  color: AppColors.white,
-                  fontWeight: FontWeight.w600,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
           ),
-
-          // Content container with top-left and top-right curve
           Positioned(
-            top: 100.h,
+            top: 0,
             left: 0,
             right: 0,
             bottom: 0,
@@ -62,17 +59,22 @@ class SubChapterScreen extends StatelessWidget {
                   Expanded(
                     child: ListView.builder(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      itemCount: 4,
+                      itemCount: subItems.length,
                       itemBuilder: (context, index) {
+                        final subTitle = subItems[index];
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 12),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               AppRouter.route.pushNamed(
                                 RoutePath.hadithDetailsScreen,
-                                extra: title,
+                                extra: {
+                                  'title': title,           // ক্যাটাগরি: যেমন "আকিদা"
+                                  'subTitle': subTitle,     // সাব-আইটেম: যেমন "আল্লাহ কোথায় আছেন?"
+                                },
                               );
                             },
+
                             child: Container(
                               padding: EdgeInsets.all(14.r),
                               decoration: BoxDecoration(
@@ -87,7 +89,7 @@ class SubChapterScreen extends StatelessWidget {
                                 ],
                               ),
                               child: Text(
-                                'Item ${index + 1}',
+                                subTitle,
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   color: Colors.black,

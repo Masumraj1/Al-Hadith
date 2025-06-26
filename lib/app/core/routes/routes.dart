@@ -48,7 +48,7 @@ class AppRouter {
             (context, state) => _buildPageWithAnimation(
               child: const HadithDetailsScreen(),
               state: state,
-              disableAnimation: true,
+              transitionType: TransitionType.detailsScreen
             ),
       ),
 

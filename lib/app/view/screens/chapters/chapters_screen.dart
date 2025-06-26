@@ -19,7 +19,6 @@ class ChaptersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const CommonNavBar(currentIndex: 1),
-      // backgroundColor: Colors.red,
       body: Stack(
         children: [
           // ==============Title Top==============
@@ -109,9 +108,13 @@ class ChaptersScreen extends StatelessWidget {
                                       Expanded(
                                         child: GestureDetector(
                                           onTap: () {
+                                            final subItems = controller.getSubItemsForTitle(title);
                                             AppRouter.route.pushNamed(
                                               RoutePath.subChapterScreen,
-                                              extra: title,
+                                              extra: {
+                                                'title': title,
+                                                'items': subItems,
+                                              },
                                             );
                                           },
                                           child: Container(

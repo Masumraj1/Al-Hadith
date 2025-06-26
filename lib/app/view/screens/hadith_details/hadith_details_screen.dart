@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_colors.dart';
-import '../../common_widgets/common_nav_bar/common_nav_bar.dart';
 import '../../common_widgets/hadith_rich_text/hadith_rich_text.dart';
 import '../../common_widgets/haxon_widget/haxon_widget.dart';
 
@@ -14,39 +13,54 @@ class HadithDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String title = GoRouterState.of(context).extra as String;
-    debugPrint("$title");
+    final Map data = GoRouterState.of(context).extra as Map;
+    final String title = data['title'];        // যেমন: আকিদা
+    final String subTitle = data['subTitle'];  // যেমন: আল্লাহ কোথায় আছেন?
 
     return Scaffold(
-
-
+      appBar: AppBar(
+        backgroundColor: AppColors.primary,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.white),
+          onPressed: () => context.pop(),
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              subTitle,
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),   Text(
+              title,
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
-          // ==============Title Top==============
           Container(
             height: double.infinity,
             width: double.infinity,
             decoration: const BoxDecoration(color: AppColors.primary),
-            child: Padding(
-              padding: EdgeInsets.only(top: 40.h),
-              child: CustomText(
-                text: title,
-                fontSize: 20.sp,
-                color: AppColors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
           ),
-
-          // Content container with top-left and top-right curve
           Positioned(
-            top: 100.h,
+            top: 0,
             left: 0,
             right: 0,
             bottom: 0,
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xFFF5F5F5),
+                color: const Color(0xFFF5F5F5),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.w),
                   topRight: Radius.circular(30.w),
@@ -56,24 +70,23 @@ class HadithDetailsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ===============Details Header Header===========
-                    Container(
-                      padding: EdgeInsets.all(12.r),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(12.r),
-                          topLeft: Radius.circular(12.r),
-                        ),
-                      ),
-                      child: HadithRichText(
-                        chapterLabel: '1/1 Chapter: ',
-                        chapterTitle:
-                            'How the Divine Revelation started being revealed to Allah’s Messenger',
-                        description:
-                            'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.',
-                      ),
-                    ),
+                    // ===============Details Header===========
+                    // Container(
+                    //   padding: EdgeInsets.all(12.r),
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.white,
+                    //     borderRadius: BorderRadius.only(
+                    //       topRight: Radius.circular(12.r),
+                    //       topLeft: Radius.circular(12.r),
+                    //     ),
+                    //   ),
+                    //   child: HadithRichText(
+                    //     chapterLabel: '1/1 Chapter: ',
+                    //     chapterTitle: "How the Divine Revelation started being revealed to Allah's Messenger", // এখানে ক্যাটাগরি দেখাবে subtitle হিশেবে
+                    //     description:
+                    //     'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.',
+                    //   ),
+                    // ),
                     const SizedBox(height: 16),
 
                     // ===========Hadith Card================
@@ -81,7 +94,7 @@ class HadithDetailsScreen extends StatelessWidget {
                       padding: EdgeInsets.all(16.r),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                         borderRadius: BorderRadius.circular(12.r),
+                        borderRadius: BorderRadius.circular(30.r),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,8 +111,7 @@ class HadithDetailsScreen extends StatelessWidget {
                               SizedBox(width: 10.w),
                               Expanded(
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomText(
                                       fontSize: 13.sp,
@@ -107,7 +119,6 @@ class HadithDetailsScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w600,
                                       color: AppColors.black,
                                     ),
-
                                     CustomText(
                                       fontSize: 12.sp,
                                       text: "Books Name",
@@ -134,7 +145,6 @@ class HadithDetailsScreen extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(width: 4.w),
-                              //=================Bottom Sheet Icon==============
                               GestureDetector(
                                 onTap: () {
                                   showMoreOptionsBottomSheet(context);
@@ -148,52 +158,47 @@ class HadithDetailsScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 16.w),
 
-                          // ============Arabic Hadith==============
+                          // Arabic Hadith
                           CustomText(
+                            maxLines: 30,
                             textAlign: TextAlign.right,
-                            maxLines: 20,
                             fontSize: 20.sp,
-                            text:
-                                "عَنْ أَبِي هُرَيْرَةَ - رضي الله عنه - قَالَ: قَالَ رَسُولُ اللَّهِ - صلى الله عليه وسلم - فِي الْبَحْرِ: «هُوَ الطَّهُورُ مَاؤُهُ الْحِلُّ مَيْتَتُهُ» أَخْرَجَهُ الْأَرْبَعَةُ، وَابْنُ أَبِي شَيْبَةَ وَاللَّفْظُ لَهُ (1)، وَصَحَّحَهُ ابْنُ خُزَيْمَةَ وَالتِّرْمِذِيُّ",
+                            text: "عَنْ أَبِي هُرَيْرَةَ - رضي الله عنه - قَالَ: قَالَ رَسُولُ اللَّهِ - صلى الله عليه وسلم - فِي الْبَحْرِ: «هُوَ الطَّهُورُ مَاؤُهُ الْحِلُّ مَيْتَتُهُ» أَخْرَجَهُ الْأَرْبَعَةُ، وَابْنُ أَبِي شَيْبَةَ وَاللَّفْظُ لَهُ (1)، وَصَحَّحَهُ ابْنُ خُزَيْمَةَ وَالتِّرْمِذِيُّ",
                             fontWeight: FontWeight.w400,
                             color: AppColors.black,
                           ),
-
                           SizedBox(height: 16.w),
 
                           // Narrator
                           CustomText(
                             textAlign: TextAlign.start,
-                            maxLines: 10,
+                            maxLines: 5,
+                            text: "It is narrated from Abu Hurairah (may Allaah have mercy on him):",
                             fontSize: 14.sp,
-                            text:
-                                "It is narrated from Abu Hurairah (may Allaah have mercy on him)",
                             fontWeight: FontWeight.w600,
                             color: AppColors.primary,
                           ),
-
                           SizedBox(height: 8.h),
 
-                          // Bangla or English Translation
+                          // Translation
                           CustomText(
                             textAlign: TextAlign.start,
-                            maxLines: 20,
-                            fontSize: 14.sp,
+                            maxLines: 30,
                             text:
-                                "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
+                            "IIn publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                             color: AppColors.black,
                           ),
-
                           const SizedBox(height: 16),
 
                           // Reference
                           CustomText(
                             textAlign: TextAlign.start,
-                            maxLines: 5,
-                            fontSize: 12.sp,
+                            maxLines: 10,
                             text:
-                                "(See also 51, 2681, 2804, 2941, 2978, 3174, 4553, 5980, 6260, 7196, 7541) (Modern Publication: 6, Islamic Foundation: 6)",
+                            "(See also 51, 2681...) (Modern Publication: 6, Islamic Foundation: 6)",
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
                             color: Colors.grey,
                           ),
