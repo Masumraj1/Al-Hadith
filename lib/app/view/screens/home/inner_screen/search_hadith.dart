@@ -99,6 +99,7 @@ class SearchHadith extends StatelessWidget {
                                 extra: {
                                   'title': title,
                                   'subTitle': item,
+                                  "isHadith":true
                                 },
                               );
                             },

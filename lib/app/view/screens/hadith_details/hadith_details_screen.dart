@@ -14,8 +14,9 @@ class HadithDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map data = GoRouterState.of(context).extra as Map;
-    final String title = data['title'];        // যেমন: আকিদা
-    final String subTitle = data['subTitle'];  // যেমন: আল্লাহ কোথায় আছেন?
+    final String title = data['title'];
+    final String subTitle = data['subTitle'];
+    final bool isHadith = data["isHadith"];
 
     return Scaffold(
       appBar: AppBar(
@@ -71,22 +72,23 @@ class HadithDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // ===============Details Header===========
-                    // Container(
-                    //   padding: EdgeInsets.all(12.r),
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.white,
-                    //     borderRadius: BorderRadius.only(
-                    //       topRight: Radius.circular(12.r),
-                    //       topLeft: Radius.circular(12.r),
-                    //     ),
-                    //   ),
-                    //   child: HadithRichText(
-                    //     chapterLabel: '1/1 Chapter: ',
-                    //     chapterTitle: "How the Divine Revelation started being revealed to Allah's Messenger", // এখানে ক্যাটাগরি দেখাবে subtitle হিশেবে
-                    //     description:
-                    //     'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.',
-                    //   ),
-                    // ),
+                    isHadith ?
+                    Container(
+                      padding: EdgeInsets.all(12.r),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(12.r),
+                          topLeft: Radius.circular(12.r),
+                        ),
+                      ),
+                      child: HadithRichText(
+                        chapterLabel: '1/1 Chapter: ',
+                        chapterTitle: "How the Divine Revelation started being revealed to Allah's Messenger", // এখানে ক্যাটাগরি দেখাবে subtitle হিশেবে
+                        description:
+                        'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.',
+                      ),
+                    ):SizedBox(),
                     const SizedBox(height: 16),
 
                     // ===========Hadith Card================

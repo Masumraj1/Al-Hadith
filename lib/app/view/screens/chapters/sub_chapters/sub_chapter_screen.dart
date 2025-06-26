@@ -69,8 +69,9 @@ class SubChapterScreen extends StatelessWidget {
                               AppRouter.route.pushNamed(
                                 RoutePath.hadithDetailsScreen,
                                 extra: {
-                                  'title': title,           // ক্যাটাগরি: যেমন "আকিদা"
-                                  'subTitle': subTitle,     // সাব-আইটেম: যেমন "আল্লাহ কোথায় আছেন?"
+                                  'title': title,
+                                  'subTitle': subTitle,
+                                  'isHadith': false,
                                 },
                               );
                             },
