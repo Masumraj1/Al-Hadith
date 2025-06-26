@@ -45,9 +45,14 @@ dependencies:
   shimmer: ^3.0.0
   cached_network_image: ^3.4.1
   fluttertoast: ^8.2.12
+  drift: ^2.27.0
+  sqlite3_flutter_libs: ^0.5.34
+  path_provider: ^2.1.5
+  path: ^1.9.1
   device_preview: ^1.2.0
 
 dev_dependencies:
+  drift_dev: ^2.27.0
   build_runner: ^2.4.10
   flutter_gen_runner: null
   flutter_test:
