@@ -4,6 +4,8 @@ import 'package:al_hadith/app/view/common_widgets/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../common_widgets/haxon_widget/haxon_widget.dart';
+
 class HadithBookItem extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -32,10 +34,13 @@ class HadithBookItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: ListTile(
-          leading: CircleAvatar(
+          leading: HexagonWidget(
+            text: iconText,
             backgroundColor: iconColor,
-            child: CustomText(text: iconText, color: AppColors.white),
+            textColor: AppColors.white,
+            fontSize: 14.sp,
           ),
+
           title: CustomText(
             textAlign: TextAlign.start,
             text: title,

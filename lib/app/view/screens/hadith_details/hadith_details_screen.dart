@@ -91,7 +91,7 @@ class HadithDetailsScreen extends StatelessWidget {
                                 text: 'B',
                                 backgroundColor: Colors.teal,
                                 textColor: Colors.white,
-                                fontSize: 14,
+                                fontSize: 14.sp,
                               ),
                               SizedBox(width: 10.w),
                               Expanded(
