@@ -106,7 +106,6 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: Obx(() {
               if (homeController.hadithBooks.isEmpty) {
-                // ডাটা লোড হচ্ছে না বা খালি থাকলে এটা দেখাবে
                 return Center(
                   child: Text(
                     'No data found',
