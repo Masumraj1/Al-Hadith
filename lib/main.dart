@@ -7,25 +7,16 @@ import 'app/data/seeder/seed_topics.dart';
 import 'app/data/seeder/seeder.dart';
 import 'app/view/screens/home/controller/home_controller.dart';
 import 'my_app.dart';
-// late AppDatabase db;
 
-// void main() {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   // db = AppDatabase();
-//   DeviceUtils.lockDevicePortrait();
-//   runApp(const MyApp());
-//
-// }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final appDatabase = AppDatabase();
   await seedInitialBooks(appDatabase);
-  await seedInitialTopics(appDatabase); // ✅ Call here
+  await seedInitialTopics(appDatabase);
 
 
-  // তারপর Get.lazyPut করো বা Controller ইনিশিয়ালাইজ করো
   Get.lazyPut(() => HomeController(appDatabase), fenix: true);
 
   runApp(MyApp());
