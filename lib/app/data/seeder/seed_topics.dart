@@ -3,10 +3,9 @@ import 'package:al_hadith/app/data/database.dart';
 Future<void> seedInitialTopics(AppDatabase db) async {
   final existingTopics = await db.bookDao.getAllTopics();
   if (existingTopics.isEmpty) {
-    // ✅ সহিহ বুখারী Topics
     await db.bookDao.insertTopic(TopicsCompanion.insert(
       title: 'ওহীর সূচনা',
-      bookId: 1, // সহিহ বুখারী id
+      bookId: 1,
     ));
     await db.bookDao.insertTopic(TopicsCompanion.insert(
       title: 'ইমান সম্পর্কে বর্ণনা',
@@ -21,7 +20,7 @@ Future<void> seedInitialTopics(AppDatabase db) async {
       bookId: 1,
     ));
 
-    // ✅ সহিহ মুসলিম Topics
+
     await db.bookDao.insertTopic(TopicsCompanion.insert(
       title: 'তওবা ও ক্ষমা',
       bookId: 2,
@@ -39,7 +38,7 @@ Future<void> seedInitialTopics(AppDatabase db) async {
       bookId: 2,
     ));
 
-    // ✅ সুনানে আবু দাউদ Topics
+
     await db.bookDao.insertTopic(TopicsCompanion.insert(
       title: 'আযান সম্পর্কিত হাদীস',
       bookId: 3,
@@ -57,7 +56,7 @@ Future<void> seedInitialTopics(AppDatabase db) async {
       bookId: 3,
     ));
 
-    // ✅ সুনানে তিরমিজি Topics
+
     await db.bookDao.insertTopic(TopicsCompanion.insert(
       title: 'রোজার মাসায়েল',
       bookId: 4,
