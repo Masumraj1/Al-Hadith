@@ -123,6 +123,8 @@ class HomeController extends GetxController {
     return db.bookDao.getTopicsByBookId(bookId);
   }
 
+
+
   Color colorFromHex(String hexColor) {
     hexColor = hexColor.replaceAll("#", "");
     if (hexColor.length == 6) hexColor = "FF$hexColor";

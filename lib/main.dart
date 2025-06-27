@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'app/core/utils/device_utils/device_utils.dart';
 import 'app/data/database.dart';
+import 'app/data/seeder/seed_topics.dart';
 import 'app/data/seeder/seeder.dart';
 import 'app/view/screens/home/controller/home_controller.dart';
 import 'my_app.dart';
@@ -21,6 +22,8 @@ void main() async {
 
   final appDatabase = AppDatabase();
   await seedInitialBooks(appDatabase);
+  await seedInitialTopics(appDatabase); // ✅ Call here
+
 
   // তারপর Get.lazyPut করো বা Controller ইনিশিয়ালাইজ করো
   Get.lazyPut(() => HomeController(appDatabase), fenix: true);

@@ -430,21 +430,18 @@ class $TopicsTable extends Topics with TableInfo<$TopicsTable, Topic> {
     false,
     type: DriftSqlType.int,
     requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES books (id)',
-    ),
   );
-  static const VerificationMeta _topicMeta = const VerificationMeta('topic');
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
-  late final GeneratedColumn<String> topic = GeneratedColumn<String>(
-    'topic',
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+    'title',
     aliasedName,
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
   @override
-  List<GeneratedColumn> get $columns => [id, bookId, topic];
+  List<GeneratedColumn> get $columns => [id, bookId, title];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -468,13 +465,13 @@ class $TopicsTable extends Topics with TableInfo<$TopicsTable, Topic> {
     } else if (isInserting) {
       context.missing(_bookIdMeta);
     }
-    if (data.containsKey('topic')) {
+    if (data.containsKey('title')) {
       context.handle(
-        _topicMeta,
-        topic.isAcceptableOrUnknown(data['topic']!, _topicMeta),
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
       );
     } else if (isInserting) {
-      context.missing(_topicMeta);
+      context.missing(_titleMeta);
     }
     return context;
   }
@@ -495,10 +492,10 @@ class $TopicsTable extends Topics with TableInfo<$TopicsTable, Topic> {
             DriftSqlType.int,
             data['${effectivePrefix}book_id'],
           )!,
-      topic:
+      title:
           attachedDatabase.typeMapping.read(
             DriftSqlType.string,
-            data['${effectivePrefix}topic'],
+            data['${effectivePrefix}title'],
           )!,
     );
   }
@@ -512,14 +509,14 @@ class $TopicsTable extends Topics with TableInfo<$TopicsTable, Topic> {
 class Topic extends DataClass implements Insertable<Topic> {
   final int id;
   final int bookId;
-  final String topic;
-  const Topic({required this.id, required this.bookId, required this.topic});
+  final String title;
+  const Topic({required this.id, required this.bookId, required this.title});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['book_id'] = Variable<int>(bookId);
-    map['topic'] = Variable<String>(topic);
+    map['title'] = Variable<String>(title);
     return map;
   }
 
@@ -527,7 +524,7 @@ class Topic extends DataClass implements Insertable<Topic> {
     return TopicsCompanion(
       id: Value(id),
       bookId: Value(bookId),
-      topic: Value(topic),
+      title: Value(title),
     );
   }
 
@@ -539,7 +536,7 @@ class Topic extends DataClass implements Insertable<Topic> {
     return Topic(
       id: serializer.fromJson<int>(json['id']),
       bookId: serializer.fromJson<int>(json['bookId']),
-      topic: serializer.fromJson<String>(json['topic']),
+      title: serializer.fromJson<String>(json['title']),
     );
   }
   @override
@@ -548,20 +545,20 @@ class Topic extends DataClass implements Insertable<Topic> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'bookId': serializer.toJson<int>(bookId),
-      'topic': serializer.toJson<String>(topic),
+      'title': serializer.toJson<String>(title),
     };
   }
 
-  Topic copyWith({int? id, int? bookId, String? topic}) => Topic(
+  Topic copyWith({int? id, int? bookId, String? title}) => Topic(
     id: id ?? this.id,
     bookId: bookId ?? this.bookId,
-    topic: topic ?? this.topic,
+    title: title ?? this.title,
   );
   Topic copyWithCompanion(TopicsCompanion data) {
     return Topic(
       id: data.id.present ? data.id.value : this.id,
       bookId: data.bookId.present ? data.bookId.value : this.bookId,
-      topic: data.topic.present ? data.topic.value : this.topic,
+      title: data.title.present ? data.title.value : this.title,
     );
   }
 
@@ -570,58 +567,58 @@ class Topic extends DataClass implements Insertable<Topic> {
     return (StringBuffer('Topic(')
           ..write('id: $id, ')
           ..write('bookId: $bookId, ')
-          ..write('topic: $topic')
+          ..write('title: $title')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, bookId, topic);
+  int get hashCode => Object.hash(id, bookId, title);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is Topic &&
           other.id == this.id &&
           other.bookId == this.bookId &&
-          other.topic == this.topic);
+          other.title == this.title);
 }
 
 class TopicsCompanion extends UpdateCompanion<Topic> {
   final Value<int> id;
   final Value<int> bookId;
-  final Value<String> topic;
+  final Value<String> title;
   const TopicsCompanion({
     this.id = const Value.absent(),
     this.bookId = const Value.absent(),
-    this.topic = const Value.absent(),
+    this.title = const Value.absent(),
   });
   TopicsCompanion.insert({
     this.id = const Value.absent(),
     required int bookId,
-    required String topic,
+    required String title,
   }) : bookId = Value(bookId),
-       topic = Value(topic);
+       title = Value(title);
   static Insertable<Topic> custom({
     Expression<int>? id,
     Expression<int>? bookId,
-    Expression<String>? topic,
+    Expression<String>? title,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (bookId != null) 'book_id': bookId,
-      if (topic != null) 'topic': topic,
+      if (title != null) 'title': title,
     });
   }
 
   TopicsCompanion copyWith({
     Value<int>? id,
     Value<int>? bookId,
-    Value<String>? topic,
+    Value<String>? title,
   }) {
     return TopicsCompanion(
       id: id ?? this.id,
       bookId: bookId ?? this.bookId,
-      topic: topic ?? this.topic,
+      title: title ?? this.title,
     );
   }
 
@@ -634,8 +631,8 @@ class TopicsCompanion extends UpdateCompanion<Topic> {
     if (bookId.present) {
       map['book_id'] = Variable<int>(bookId.value);
     }
-    if (topic.present) {
-      map['topic'] = Variable<String>(topic.value);
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
     }
     return map;
   }
@@ -645,7 +642,7 @@ class TopicsCompanion extends UpdateCompanion<Topic> {
     return (StringBuffer('TopicsCompanion(')
           ..write('id: $id, ')
           ..write('bookId: $bookId, ')
-          ..write('topic: $topic')
+          ..write('title: $title')
           ..write(')'))
         .toString();
   }
@@ -682,30 +679,6 @@ typedef $$BooksTableUpdateCompanionBuilder =
       Value<String> iconText,
       Value<String> iconColor,
     });
-
-final class $$BooksTableReferences
-    extends BaseReferences<_$AppDatabase, $BooksTable, Book> {
-  $$BooksTableReferences(super.$_db, super.$_table, super.$_typedResult);
-
-  static MultiTypedResultKey<$TopicsTable, List<Topic>> _topicsRefsTable(
-    _$AppDatabase db,
-  ) => MultiTypedResultKey.fromTable(
-    db.topics,
-    aliasName: $_aliasNameGenerator(db.books.id, db.topics.bookId),
-  );
-
-  $$TopicsTableProcessedTableManager get topicsRefs {
-    final manager = $$TopicsTableTableManager(
-      $_db,
-      $_db.topics,
-    ).filter((f) => f.bookId.id.sqlEquals($_itemColumn<int>('id')!));
-
-    final cache = $_typedResult.readTableOrNull(_topicsRefsTable($_db));
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
-  }
-}
 
 class $$BooksTableFilterComposer extends Composer<_$AppDatabase, $BooksTable> {
   $$BooksTableFilterComposer({
@@ -744,31 +717,6 @@ class $$BooksTableFilterComposer extends Composer<_$AppDatabase, $BooksTable> {
     column: $table.iconColor,
     builder: (column) => ColumnFilters(column),
   );
-
-  Expression<bool> topicsRefs(
-    Expression<bool> Function($$TopicsTableFilterComposer f) f,
-  ) {
-    final $$TopicsTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.topics,
-      getReferencedColumn: (t) => t.bookId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$TopicsTableFilterComposer(
-            $db: $db,
-            $table: $db.topics,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return f(composer);
-  }
 }
 
 class $$BooksTableOrderingComposer
@@ -837,31 +785,6 @@ class $$BooksTableAnnotationComposer
 
   GeneratedColumn<String> get iconColor =>
       $composableBuilder(column: $table.iconColor, builder: (column) => column);
-
-  Expression<T> topicsRefs<T extends Object>(
-    Expression<T> Function($$TopicsTableAnnotationComposer a) f,
-  ) {
-    final $$TopicsTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.topics,
-      getReferencedColumn: (t) => t.bookId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$TopicsTableAnnotationComposer(
-            $db: $db,
-            $table: $db.topics,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return f(composer);
-  }
 }
 
 class $$BooksTableTableManager
@@ -875,9 +798,9 @@ class $$BooksTableTableManager
           $$BooksTableAnnotationComposer,
           $$BooksTableCreateCompanionBuilder,
           $$BooksTableUpdateCompanionBuilder,
-          (Book, $$BooksTableReferences),
+          (Book, BaseReferences<_$AppDatabase, $BooksTable, Book>),
           Book,
-          PrefetchHooks Function({bool topicsRefs})
+          PrefetchHooks Function()
         > {
   $$BooksTableTableManager(_$AppDatabase db, $BooksTable table)
     : super(
@@ -928,35 +851,11 @@ class $$BooksTableTableManager
                       .map(
                         (e) => (
                           e.readTable(table),
-                          $$BooksTableReferences(db, table, e),
+                          BaseReferences(db, table, e),
                         ),
                       )
                       .toList(),
-          prefetchHooksCallback: ({topicsRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [if (topicsRefs) db.topics],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (topicsRefs)
-                    await $_getPrefetchedData<Book, $BooksTable, Topic>(
-                      currentTable: table,
-                      referencedTable: $$BooksTableReferences._topicsRefsTable(
-                        db,
-                      ),
-                      managerFromTypedResult:
-                          (p0) =>
-                              $$BooksTableReferences(db, table, p0).topicsRefs,
-                      referencedItemsForCurrentItem:
-                          (item, referencedItems) =>
-                              referencedItems.where((e) => e.bookId == item.id),
-                      typedResults: items,
-                    ),
-                ];
-              },
-            );
-          },
+          prefetchHooksCallback: null,
         ),
       );
 }
@@ -971,44 +870,22 @@ typedef $$BooksTableProcessedTableManager =
       $$BooksTableAnnotationComposer,
       $$BooksTableCreateCompanionBuilder,
       $$BooksTableUpdateCompanionBuilder,
-      (Book, $$BooksTableReferences),
+      (Book, BaseReferences<_$AppDatabase, $BooksTable, Book>),
       Book,
-      PrefetchHooks Function({bool topicsRefs})
+      PrefetchHooks Function()
     >;
 typedef $$TopicsTableCreateCompanionBuilder =
     TopicsCompanion Function({
       Value<int> id,
       required int bookId,
-      required String topic,
+      required String title,
     });
 typedef $$TopicsTableUpdateCompanionBuilder =
     TopicsCompanion Function({
       Value<int> id,
       Value<int> bookId,
-      Value<String> topic,
+      Value<String> title,
     });
-
-final class $$TopicsTableReferences
-    extends BaseReferences<_$AppDatabase, $TopicsTable, Topic> {
-  $$TopicsTableReferences(super.$_db, super.$_table, super.$_typedResult);
-
-  static $BooksTable _bookIdTable(_$AppDatabase db) =>
-      db.books.createAlias($_aliasNameGenerator(db.topics.bookId, db.books.id));
-
-  $$BooksTableProcessedTableManager get bookId {
-    final $_column = $_itemColumn<int>('book_id')!;
-
-    final manager = $$BooksTableTableManager(
-      $_db,
-      $_db.books,
-    ).filter((f) => f.id.sqlEquals($_column));
-    final item = $_typedResult.readTableOrNull(_bookIdTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
-  }
-}
 
 class $$TopicsTableFilterComposer
     extends Composer<_$AppDatabase, $TopicsTable> {
@@ -1024,33 +901,15 @@ class $$TopicsTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get topic => $composableBuilder(
-    column: $table.topic,
+  ColumnFilters<int> get bookId => $composableBuilder(
+    column: $table.bookId,
     builder: (column) => ColumnFilters(column),
   );
 
-  $$BooksTableFilterComposer get bookId {
-    final $$BooksTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.bookId,
-      referencedTable: $db.books,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$BooksTableFilterComposer(
-            $db: $db,
-            $table: $db.books,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
+  ColumnFilters<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
 class $$TopicsTableOrderingComposer
@@ -1067,33 +926,15 @@ class $$TopicsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get topic => $composableBuilder(
-    column: $table.topic,
+  ColumnOrderings<int> get bookId => $composableBuilder(
+    column: $table.bookId,
     builder: (column) => ColumnOrderings(column),
   );
 
-  $$BooksTableOrderingComposer get bookId {
-    final $$BooksTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.bookId,
-      referencedTable: $db.books,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$BooksTableOrderingComposer(
-            $db: $db,
-            $table: $db.books,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
+  ColumnOrderings<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$TopicsTableAnnotationComposer
@@ -1108,31 +949,11 @@ class $$TopicsTableAnnotationComposer
   GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
 
-  GeneratedColumn<String> get topic =>
-      $composableBuilder(column: $table.topic, builder: (column) => column);
+  GeneratedColumn<int> get bookId =>
+      $composableBuilder(column: $table.bookId, builder: (column) => column);
 
-  $$BooksTableAnnotationComposer get bookId {
-    final $$BooksTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.bookId,
-      referencedTable: $db.books,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$BooksTableAnnotationComposer(
-            $db: $db,
-            $table: $db.books,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
 }
 
 class $$TopicsTableTableManager
@@ -1146,9 +967,9 @@ class $$TopicsTableTableManager
           $$TopicsTableAnnotationComposer,
           $$TopicsTableCreateCompanionBuilder,
           $$TopicsTableUpdateCompanionBuilder,
-          (Topic, $$TopicsTableReferences),
+          (Topic, BaseReferences<_$AppDatabase, $TopicsTable, Topic>),
           Topic,
-          PrefetchHooks Function({bool bookId})
+          PrefetchHooks Function()
         > {
   $$TopicsTableTableManager(_$AppDatabase db, $TopicsTable table)
     : super(
@@ -1165,64 +986,26 @@ class $$TopicsTableTableManager
               ({
                 Value<int> id = const Value.absent(),
                 Value<int> bookId = const Value.absent(),
-                Value<String> topic = const Value.absent(),
-              }) => TopicsCompanion(id: id, bookId: bookId, topic: topic),
+                Value<String> title = const Value.absent(),
+              }) => TopicsCompanion(id: id, bookId: bookId, title: title),
           createCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
                 required int bookId,
-                required String topic,
+                required String title,
               }) =>
-                  TopicsCompanion.insert(id: id, bookId: bookId, topic: topic),
+                  TopicsCompanion.insert(id: id, bookId: bookId, title: title),
           withReferenceMapper:
               (p0) =>
                   p0
                       .map(
                         (e) => (
                           e.readTable(table),
-                          $$TopicsTableReferences(db, table, e),
+                          BaseReferences(db, table, e),
                         ),
                       )
                       .toList(),
-          prefetchHooksCallback: ({bookId = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [],
-              addJoins: <
-                T extends TableManagerState<
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic
-                >
-              >(state) {
-                if (bookId) {
-                  state =
-                      state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.bookId,
-                            referencedTable: $$TopicsTableReferences
-                                ._bookIdTable(db),
-                            referencedColumn:
-                                $$TopicsTableReferences._bookIdTable(db).id,
-                          )
-                          as T;
-                }
-
-                return state;
-              },
-              getPrefetchedDataCallback: (items) async {
-                return [];
-              },
-            );
-          },
+          prefetchHooksCallback: null,
         ),
       );
 }
@@ -1237,9 +1020,9 @@ typedef $$TopicsTableProcessedTableManager =
       $$TopicsTableAnnotationComposer,
       $$TopicsTableCreateCompanionBuilder,
       $$TopicsTableUpdateCompanionBuilder,
-      (Topic, $$TopicsTableReferences),
+      (Topic, BaseReferences<_$AppDatabase, $TopicsTable, Topic>),
       Topic,
-      PrefetchHooks Function({bool bookId})
+      PrefetchHooks Function()
     >;
 
 class $AppDatabaseManager {

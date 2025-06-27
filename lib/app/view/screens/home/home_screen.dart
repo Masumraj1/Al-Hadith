@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         extra: {
                           'title': book.title,
                           'subTitle': subTitle,
-                          'items': items,
+                          'items': items.map((e) => e.title).toList(),
                         },
                       );
                     },
@@ -146,39 +146,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 
-          // Expanded(
-          //   child: ListView.builder(
-          //     itemCount: homeController.hadithBooks.length,
-          //     itemBuilder: (context, index) {
-          //       final book = homeController.hadithBooks[index];
-          //       return GestureDetector(
-          //         onTap: () {
-          //           final title = book['title'];
-          //           final subTitle = '${book['count']} টি হাদীস';
-          //           final items = homeController.getTopicsByTitle(title);
-          //
-          //           AppRouter.route.pushNamed(
-          //             RoutePath.searchHadith,
-          //             extra: {
-          //               'title': title,
-          //               'subTitle': subTitle,
-          //               'items': items,
-          //             },
-          //           );
-          //
-          //         },
-          //
-          //         child: HadithBookItem(
-          //           title: book['title'],
-          //           subtitle: book['subtitle'],
-          //           count: book['count'],
-          //           iconText: book['iconText'],
-          //           iconColor: book['iconColor'],
-          //         ),
-          //       );
-          //     },
-          //   ),
-          // ),
         ],
       ),
     );
