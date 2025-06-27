@@ -106,7 +106,13 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: Obx(() {
               if (homeController.hadithBooks.isEmpty) {
-                return Center(child: CircularProgressIndicator());
+                // ডাটা লোড হচ্ছে না বা খালি থাকলে এটা দেখাবে
+                return Center(
+                  child: Text(
+                    'No data found',
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                );
               }
               return ListView.builder(
                 itemCount: homeController.hadithBooks.length,
@@ -137,6 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }),
           ),
+
 
 
 
