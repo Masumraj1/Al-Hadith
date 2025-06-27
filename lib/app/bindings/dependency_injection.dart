@@ -11,8 +11,8 @@ import '../view/screens/home/controller/home_controller.dart';
 class DependencyInjection extends Bindings {
   @override
   void dependencies() {
-    final appDatabase = AppDatabase();
-    Get.lazyPut(() => HomeController(), fenix: true);
+    // final appDatabase = AppDatabase();
+    // Get.lazyPut(() => HomeController(appDatabase), fenix: true);
     Get.lazyPut(() => ChapterController(), fenix: true);
     Get.lazyPut(() => HadithDetailsController(), fenix: true);
 

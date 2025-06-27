@@ -104,38 +104,75 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // ==============List of Books==============
           Expanded(
-            child: ListView.builder(
-              itemCount: homeController.hadithBooks.length,
-              itemBuilder: (context, index) {
-                final book = homeController.hadithBooks[index];
-                return GestureDetector(
-                  onTap: () {
-                    final title = book['title'];
-                    final subTitle = '${book['count']} টি হাদীস';
-                    final items = homeController.getTopicsByTitle(title);
-
-                    AppRouter.route.pushNamed(
-                      RoutePath.searchHadith,
-                      extra: {
-                        'title': title,
-                        'subTitle': subTitle,
-                        'items': items,
-                      },
-                    );
-
-                  },
-
-                  child: HadithBookItem(
-                    title: book['title'],
-                    subtitle: book['subtitle'],
-                    count: book['count'],
-                    iconText: book['iconText'],
-                    iconColor: book['iconColor'],
-                  ),
-                );
-              },
-            ),
+            child: Obx(() {
+              if (homeController.hadithBooks.isEmpty) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return ListView.builder(
+                itemCount: homeController.hadithBooks.length,
+                itemBuilder: (context, index) {
+                  final book = homeController.hadithBooks[index];
+                  return GestureDetector(
+                    onTap: () async {
+                      final subTitle = '${book.count} টি হাদীস';
+                      final items = await homeController.getTopicsByBookId(book.id);
+                      AppRouter.route.pushNamed(
+                        RoutePath.searchHadith,
+                        extra: {
+                          'title': book.title,
+                          'subTitle': subTitle,
+                          'items': items,
+                        },
+                      );
+                    },
+                    child: HadithBookItem(
+                      title: book.title,
+                      subtitle: book.subtitle,
+                      count: book.count,
+                      iconText: book.iconText,
+                      iconColor: homeController.colorFromHex(book.iconColor),
+                    ),
+                  );
+                },
+              );
+            }),
           ),
+
+
+
+          // Expanded(
+          //   child: ListView.builder(
+          //     itemCount: homeController.hadithBooks.length,
+          //     itemBuilder: (context, index) {
+          //       final book = homeController.hadithBooks[index];
+          //       return GestureDetector(
+          //         onTap: () {
+          //           final title = book['title'];
+          //           final subTitle = '${book['count']} টি হাদীস';
+          //           final items = homeController.getTopicsByTitle(title);
+          //
+          //           AppRouter.route.pushNamed(
+          //             RoutePath.searchHadith,
+          //             extra: {
+          //               'title': title,
+          //               'subTitle': subTitle,
+          //               'items': items,
+          //             },
+          //           );
+          //
+          //         },
+          //
+          //         child: HadithBookItem(
+          //           title: book['title'],
+          //           subtitle: book['subtitle'],
+          //           count: book['count'],
+          //           iconText: book['iconText'],
+          //           iconColor: book['iconColor'],
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
         ],
       ),
     );

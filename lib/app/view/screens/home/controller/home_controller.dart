@@ -1,12 +1,100 @@
-import 'dart:ui';
+// import 'dart:ui';
+//
+// import 'package:get/get.dart';
+//
+// class HomeController extends GetxController{
+//
+//   int currentIndex = 0;
+//
+//   //>>>>>>>>>>>>>>>>hadithList<<<<<<<<<<<<<<<<<<<<<>
+//   final List<String> hadithList = [
+//     "তিনি বললেন, রাসূলুল্লাহ (সা.) বলেছেন, “আমি তোমাদেরকে কবর যিয়ারত করতে নিষেধ করেছিলাম এখন তোমরা উহার যিয়ারত করো।” (মুসলিম ৯৭৭)",
+//     "রাসূলুল্লাহ (সা.) বলেছেন, ‘যে ব্যক্তি কোনো মুমিনের দুনিয়ার দুঃখ দূর করে দেয়, আল্লাহ কিয়ামতের দিনে তার দুঃখ দূর করবেন।’ (মুসলিম ২৬৯৯)",
+//     "রাসূলুল্লাহ (সা.) বলেন, ‘যে আমাদের মতো দেখতে চায়, সে যেন মৃতকে অনুসরণ করে।’ (মুসনাদে আহমদ)",
+//     "হাদীস: দান করলে সম্পদ কমে না। (মুসলিম)",
+//     "তোমরা সত্য বল, কারণ সত্য সৎকর্মের দিকে পরিচালিত করে। (বুখারি)",
+//   ];
+//
+//
+//   //>>>>>>>>>>>>>>>hadithBooks<<<<<<<<<<<<<<<<<<<<<>
+//   final List<Map<String, dynamic>> hadithBooks = [
+//     {
+//       'title': 'সহিহ বুখারী',
+//       'subtitle': 'ইমাম বুখারী',
+//       'count': '৭৫৬৩',
+//       'iconText': 'B',
+//       'iconColor': Color(0xFF56C596),
+//     },
+//     {
+//       'title': 'সহিহ মুসলিম',
+//       'subtitle': 'ইমাম মুসলিম',
+//       'count': '৭১৯০',
+//       'iconText': 'M',
+//       'iconColor': Color(0xFF007BFF),
+//     },
+//     {
+//       'title': 'সুনানে আবু দাউদ',
+//       'subtitle': 'ইমাম আবু দাউদ',
+//       'count': '৫২৭৪',
+//       'iconText': 'A',
+//       'iconColor': Color(0xFFFF7043),
+//     },
+//     {
+//       'title': 'সুনানে তিরমিজি',
+//       'subtitle': 'ইমাম তিরমিজি',
+//       'count': '৩৯৫৬',
+//       'iconText': 'T',
+//       'iconColor': Color(0xFFAB47BC),
+//     },
+//   ];
+//
+//   final Map<String, List<String>> hadithTopicsByBook = {
+//     'সহিহ বুখারী': [
+//       'ওহীর সূচনা',
+//       'ইমান সম্পর্কে বর্ণনা',
+//       'জ্ঞান অর্জনের গুরুত্ব',
+//       'ইবাদতের ফজিলত',
+//     ],
+//     'সহিহ মুসলিম': [
+//       'তওবা ও ক্ষমা',
+//       'আখিরাতের ঘটনা',
+//       'সালাতের নিয়মাবলী',
+//       'সুন্নাহ ও হাদীস',
+//     ],
+//     'সুনানে আবু দাউদ': [
+//       'আযান সম্পর্কিত হাদীস',
+//       'ওযুর হুকুম',
+//       'নামাজের ভুল সংশোধন',
+//       'ইমামের দায়িত্ব',
+//     ],
+//     'সুনানে তিরমিজি': [
+//       'রোজার মাসায়েল',
+//       'যাকাত ও দান',
+//       'হজ্বের নিয়মাবলী',
+//       'সুন্নাত অনুসরণ',
+//     ],
+//   };
+//
+//   List<String> getTopicsByTitle(String title) {
+//     return hadithTopicsByBook[title] ?? ['কোনো তথ্য পাওয়া যায়নি'];
+//   }
+//
+//
+//
+// }
 
+
+
+import 'dart:ui';
+import 'package:al_hadith/app/data/database.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController{
-
+class HomeController extends GetxController {
   int currentIndex = 0;
 
-  //>>>>>>>>>>>>>>>>hadithList<<<<<<<<<<<<<<<<<<<<<>
+
+
+  //>>>>>>>>>>>>>>>>hadithList<<<<<<<<<<<<<<<<<<<<<
   final List<String> hadithList = [
     "তিনি বললেন, রাসূলুল্লাহ (সা.) বলেছেন, “আমি তোমাদেরকে কবর যিয়ারত করতে নিষেধ করেছিলাম এখন তোমরা উহার যিয়ারত করো।” (মুসলিম ৯৭৭)",
     "রাসূলুল্লাহ (সা.) বলেছেন, ‘যে ব্যক্তি কোনো মুমিনের দুনিয়ার দুঃখ দূর করে দেয়, আল্লাহ কিয়ামতের দিনে তার দুঃখ দূর করবেন।’ (মুসলিম ২৬৯৯)",
@@ -15,70 +103,29 @@ class HomeController extends GetxController{
     "তোমরা সত্য বল, কারণ সত্য সৎকর্মের দিকে পরিচালিত করে। (বুখারি)",
   ];
 
+  final AppDatabase db;
+  HomeController(this.db);
 
-  //>>>>>>>>>>>>>>>hadithBooks<<<<<<<<<<<<<<<<<<<<<>
-  final List<Map<String, dynamic>> hadithBooks = [
-    {
-      'title': 'সহিহ বুখারী',
-      'subtitle': 'ইমাম বুখারী',
-      'count': '৭৫৬৩',
-      'iconText': 'B',
-      'iconColor': Color(0xFF56C596),
-    },
-    {
-      'title': 'সহিহ মুসলিম',
-      'subtitle': 'ইমাম মুসলিম',
-      'count': '৭১৯০',
-      'iconText': 'M',
-      'iconColor': Color(0xFF007BFF),
-    },
-    {
-      'title': 'সুনানে আবু দাউদ',
-      'subtitle': 'ইমাম আবু দাউদ',
-      'count': '৫২৭৪',
-      'iconText': 'A',
-      'iconColor': Color(0xFFFF7043),
-    },
-    {
-      'title': 'সুনানে তিরমিজি',
-      'subtitle': 'ইমাম তিরমিজি',
-      'count': '৩৯৫৬',
-      'iconText': 'T',
-      'iconColor': Color(0xFFAB47BC),
-    },
-  ];
+  RxList<Book> hadithBooks = <Book>[].obs;
 
-  final Map<String, List<String>> hadithTopicsByBook = {
-    'সহিহ বুখারী': [
-      'ওহীর সূচনা',
-      'ইমান সম্পর্কে বর্ণনা',
-      'জ্ঞান অর্জনের গুরুত্ব',
-      'ইবাদতের ফজিলত',
-    ],
-    'সহিহ মুসলিম': [
-      'তওবা ও ক্ষমা',
-      'আখিরাতের ঘটনা',
-      'সালাতের নিয়মাবলী',
-      'সুন্নাহ ও হাদীস',
-    ],
-    'সুনানে আবু দাউদ': [
-      'আযান সম্পর্কিত হাদীস',
-      'ওযুর হুকুম',
-      'নামাজের ভুল সংশোধন',
-      'ইমামের দায়িত্ব',
-    ],
-    'সুনানে তিরমিজি': [
-      'রোজার মাসায়েল',
-      'যাকাত ও দান',
-      'হজ্বের নিয়মাবলী',
-      'সুন্নাত অনুসরণ',
-    ],
-  };
-
-  List<String> getTopicsByTitle(String title) {
-    return hadithTopicsByBook[title] ?? ['কোনো তথ্য পাওয়া যায়নি'];
+  @override
+  void onInit() {
+    super.onInit();
+    loadHadithBooks();
   }
 
+  Future<void> loadHadithBooks() async {
+    final books = await db.bookDao.getAllBooks();
+    hadithBooks.assignAll(books);
+  }
 
+  Future<List<Topic>> getTopicsByBookId(int bookId) {
+    return db.bookDao.getTopicsByBookId(bookId);
+  }
 
+  Color colorFromHex(String hexColor) {
+    hexColor = hexColor.replaceAll("#", "");
+    if (hexColor.length == 6) hexColor = "FF$hexColor";
+    return Color(int.parse("0x$hexColor"));
+  }
 }
